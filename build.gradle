@@ -1,0 +1,5 @@
+apply plugin: 'base'
+
+ext {
+    springVersion = "1.2.3.RELEASE"
+}

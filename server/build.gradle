@@ -1,0 +1,48 @@
+buildscript {
+    repositories { jcenter() }
+    dependencies {
+        classpath 'org.akhikhl.gretty:gretty:1.2.0'
+    }
+}
+
+apply plugin: 'war'
+apply plugin: 'jacoco'
+apply plugin: 'findbugs'
+apply plugin: 'org.akhikhl.gretty'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.springframework.boot:spring-boot-starter-web:' + springVersion
+
+    compile group: 'com.google.guava', name: 'guava', version: '18.0'
+
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.springframework.boot:spring-boot-starter-test:' + springVersion
+}
+
+gretty {
+    springBoot = true
+    springBootMainClass = 'com.bp3.seed.Application'
+    springBootVersion = springVersion
+    contextPath = '/seed'
+    extraResourceBase project(':client').buildDir.getPath() + '/app'
+    scanInterval = 1
+    port = 9085
+}
+
+tasks.withType(FindBugs) {
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+}
+
+test { finalizedBy jacocoTestReport }
+

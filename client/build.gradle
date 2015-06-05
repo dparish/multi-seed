@@ -1,0 +1,62 @@
+plugins {
+    id "com.moowork.node" version "0.9"
+    id 'base'
+}
+
+/**
+ * Runs the javascript unit tests via node. This kicks off the test but keeps it running so you can use it during dev.
+ */
+task testSingleRun (type: NpmTask) {
+    dependsOn 'npmInstall'
+    args = ['run', 'test-single-run']
+}
+
+task devTest (type: NpmTask) {
+    dependsOn 'npmInstall'
+    args = ['run', 'test']
+}
+
+task bowerDeps(dependsOn: 'npmInstall', type: NodeTask){
+    script = file('node_modules/bower/bin/bower')
+    args = ['update'];
+}
+
+/**
+ * This creates a gulp_ task, I used to use the gulp gradle plugin but this was simpler.
+ */
+tasks.addRule("Pattern: gulp_<ID>") { String taskName ->
+    def TASK_PATTERN = 'gulp_'
+    if (taskName.startsWith(TASK_PATTERN)) {
+        task (taskName, type: NodeTask)  {
+            inputs.dir file(projectDir.path + '/src/lib')
+            outputs.upToDateWhen { false }
+            script = file(projectDir.path + '/node_modules/gulp/bin/gulp.js')
+            if(buildType.equalsIgnoreCase("production")) {
+                args=[taskName - TASK_PATTERN, '--type', 'production']
+            } else {
+                args=[taskName - TASK_PATTERN]
+            }
+            doLast {
+                if(buildType.equalsIgnoreCase("production")) {
+                    println ('finished running: gulp ' + taskName - TASK_PATTERN + ' --type production')
+                } else {
+                    println ('finished running: gulp ' + taskName - TASK_PATTERN)
+                }
+            }
+        }
+    }
+}
+
+node {
+    // Version of node to use.
+    version = '0.12.2'
+
+    // Version of npm to use.
+    npmVersion = '2.9.0'
+
+    // Enabled the automatic download. False is the default (for now).
+    download = true
+}
+
+check.dependsOn testSingleRun
+

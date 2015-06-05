@@ -1,0 +1,7 @@
+<input class="form-control"
+       type="text"
+       placeholder="{{placeholder}}"
+       ng-model="vm.ngModel"
+       ng-attr-ng-disabled="ngDisabled"
+       typeahead="user.name for user in vm.getPotentialUsers($viewValue, 5)"
+       typeahead-on-select="vm.setUser($item)">

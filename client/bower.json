@@ -1,0 +1,31 @@
+{
+  "name": "bp3-angular-seed",
+  "description": "BP3 Angular Seed",
+  "version": "0.1.0",
+  "homepage": "https://github.com/BP3/BP3AngularSeed",
+  "private": false,
+  "keywords": [
+    "angular",
+    "seed",
+    "angular-seed",
+    "bp3",
+    "starter",
+    "template"
+  ],
+  "dependencies": {
+    "angular": "1.3.15",
+    "angular-bootstrap": "0.12.1",
+    "angular-route": "1.3.15",
+    "angular-touch": "1.3.15",
+    "angular-smart-table": "2.0.1",
+    "bootstrap": "3.3.4",
+    "angular-ui-router": "~0.2.13"
+  },
+  "devDependencies": {
+    "angular-mocks": "1.3.15",
+    "angular-scenario": "1.3.15"
+  },
+  "resolutions": {
+    "angular": "1.3.15"
+  }
+}
