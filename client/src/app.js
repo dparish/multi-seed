@@ -13,7 +13,10 @@
      */
     angular
         .module('seed', [
-            'ui.router'
+            'ui.router',
+            'seed.home',
+            'seed.header',
+            'seed.footer'
         ])
         .config(appConfiguration)
         .run(appSetup);
@@ -23,7 +26,6 @@
      * be performed in a separate file with the *.router.js extension.
      */
     function appConfiguration() {
-        // TODO: Perform application-wide configuration
     }
 
     /**

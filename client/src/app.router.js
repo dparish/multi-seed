@@ -20,7 +20,7 @@
     function router($urlRouterProvider, $stateProvider) {
         $urlRouterProvider
             .when('', '/home')
-            .otherwise('/');
+            .otherwise('/home');
 
         $stateProvider
             .state('seed', {
@@ -31,21 +31,9 @@
                         templateUrl: 'components/header/header.html',
                         controller: 'headerController as vm'
                     },
-                    'content': {
-                        templateUrl: 'home/home.html',
-                        controller: 'contentController as vm'
-                    },
                     'footer': {
                         templateUrl: 'components/footer/footer.html',
                         controller: 'footerController as vm'
-                    }
-                }
-            })
-            .state('seed.not-found', {
-                url: 'notFound',
-                views: {
-                    'view@': {
-                        templateUrl: 'not-found/not-found.html'
                     }
                 }
             });
@@ -64,7 +52,7 @@
                 $timeout(function() {
                     // Location: 'Replace' is essential for redirections when you want to
                     // overwrite the previous history record.
-                    $state.go('app.main', null, {location: 'replace'});
+                    $state.go('seed.home', null, {location: 'replace'});
                 });
             }
         });

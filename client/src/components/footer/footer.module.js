@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module('seed.typeahead', [
+    angular.module('seed.footer', [
         'components/footer/footer.html'
     ]);
 }());

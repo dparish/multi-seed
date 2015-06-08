@@ -16,7 +16,6 @@
      *
      * Please see the readme for more details.
      *
-     * @param {object} $scope The controller scope
      */
     function HomeController() {
         var vm = this;
